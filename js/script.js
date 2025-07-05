@@ -68,6 +68,11 @@ getImagesButton.addEventListener('click', () => {
             container.appendChild(img);
             container.appendChild(caption);
 
+            // Add click event to open modal with details
+            container.addEventListener('click', () => {
+              openModal(item);
+            });
+
             // Add to the gallery
             gallery.appendChild(container);
           }
@@ -81,4 +86,41 @@ getImagesButton.addEventListener('click', () => {
       // Show an error message if something goes wrong
       gallery.innerHTML = `<p>Error: ${error.message}</p>`;
     });
+});
+
+// Modal functions
+// Create modal HTML if it doesn't exist
+let modal = document.getElementById('apod-modal');
+if (!modal) {
+  modal = document.createElement('div');
+  modal.id = 'apod-modal';
+  modal.className = 'apod-modal';
+  modal.innerHTML = `
+    <div id="apod-modal-content" class="apod-modal-content">
+      <button id="apod-modal-close" class="apod-modal-close">&times;</button>
+      <img id="apod-modal-img" class="apod-modal-img" src="" alt="" />
+      <h2 id="apod-modal-title"></h2>
+      <p id="apod-modal-date" class="apod-modal-date"></p>
+      <p id="apod-modal-explanation" class="apod-modal-explanation"></p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+// Function to open the modal with image details
+function openModal(item) {
+  // Set modal content
+  document.getElementById('apod-modal-img').src = item.hdurl || item.url;
+  document.getElementById('apod-modal-img').alt = item.title;
+  document.getElementById('apod-modal-title').textContent = item.title;
+  document.getElementById('apod-modal-date').textContent = item.date;
+  document.getElementById('apod-modal-explanation').textContent = item.explanation;
+  modal.style.display = 'flex';
+}
+
+// Close modal when clicking the close button or outside the content
+modal.addEventListener('click', function(event) {
+  if (event.target === modal || event.target.id === 'apod-modal-close') {
+    modal.style.display = 'none';
+  }
 });
