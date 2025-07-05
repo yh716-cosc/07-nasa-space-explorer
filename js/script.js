@@ -12,6 +12,31 @@ setupDateInputs(startInput, endInput);
 const getImagesButton = document.querySelector('.filters button');
 const gallery = document.getElementById('gallery');
 
+// --- Fun Space Fact Section ---
+// Array of fun space facts
+const spaceFacts = [
+  "A day on Venus is longer than a year on Venus!",
+  "Neutron stars can spin at a rate of 600 rotations per second.",
+  "There are more trees on Earth than stars in the Milky Way.",
+  "The footprints on the Moon will be there for millions of years.",
+  "One million Earths could fit inside the Sun.",
+  "A spoonful of a neutron star weighs about a billion tons.",
+  "Jupiter has 95 known moons!",
+  "Space is completely silent—there is no atmosphere for sound to travel.",
+  "The hottest planet in our solar system is Venus.",
+  "The International Space Station travels at 28,000 km/h (17,500 mph)."
+];
+
+// Pick a random fact
+const randomFact = spaceFacts[Math.floor(Math.random() * spaceFacts.length)];
+
+// Create and insert the fact section above the gallery
+const factSection = document.createElement('section');
+factSection.className = 'space-fact';
+factSection.innerHTML = `<strong>Did You Know?</strong> <span>${randomFact}</span>`;
+const container = document.querySelector('.container');
+container.insertBefore(factSection, gallery);
+
 // NASA APOD API base URL and demo API key
 const API_URL = 'https://api.nasa.gov/planetary/apod';
 const API_KEY = '9CjYysqFtwftql6RFKZJ23z8p46HNZdEL9lMRpks';
