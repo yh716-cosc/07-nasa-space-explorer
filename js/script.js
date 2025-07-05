@@ -29,7 +29,7 @@ getImagesButton.addEventListener('click', () => {
   const diffDays = diffTime / (1000 * 60 * 60 * 24) + 1; // +1 to include both start and end
 
   // Set the maximum allowed range (30 days)
-  const MAX_DAYS = 30;
+  const MAX_DAYS = 9;
   if (diffDays > MAX_DAYS) {
     gallery.innerHTML = `<p>Please select a date range of ${MAX_DAYS} days or less.</p>`;
     return;
