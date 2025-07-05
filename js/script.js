@@ -35,6 +35,9 @@ getImagesButton.addEventListener('click', () => {
     return;
   }
 
+  // Show loading message
+  gallery.innerHTML = '<p style="font-size:1.2em; color:#666;">Loading space images...</p>';
+
   // Build the API URL with query parameters
   const url = `${API_URL}?api_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}`;
 
@@ -42,7 +45,7 @@ getImagesButton.addEventListener('click', () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // Clear the gallery
+      // Clear the gallery (remove loading message)
       gallery.innerHTML = '';
 
       // Check if we got an array of images
